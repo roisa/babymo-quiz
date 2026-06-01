@@ -10,6 +10,7 @@ import {
 } from "@/lib/engine/types";
 import { useQuizEngine } from "@/lib/engine/useQuizEngine";
 import { playSfx, unlockAudio, type SfxName } from "@/lib/audio/sfx";
+import { startMusic, stopMusic } from "@/lib/audio/music";
 import OceanBackground from "./OceanBackground";
 import Confetti from "./Confetti";
 import DifficultyPanel from "./DifficultyPanel";
@@ -112,6 +113,10 @@ export default function QuizGame({ category }: { category: Category }) {
         case "A":
           setAutoPlay((v) => !v);
           break;
+        case "m":
+        case "M":
+          patchSettings({ musicOn: !settings.musicOn });
+          break;
         case "f":
         case "F":
           toggleFullscreen();
@@ -127,13 +132,22 @@ export default function QuizGame({ category }: { category: Category }) {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [phase, engine, settings.soundOn, toggleFullscreen]);
+  }, [phase, engine, settings.soundOn, settings.musicOn, patchSettings, toggleFullscreen]);
 
   // Apply the recording-mode body class (hides cursor + controls).
   useEffect(() => {
     document.body.classList.toggle("recording-mode", recording);
     return () => document.body.classList.remove("recording-mode");
   }, [recording]);
+
+  // Background music follows the play lifecycle + the toggle. startMusic() is
+  // idempotent, so re-running across phase changes never restarts the loop.
+  useEffect(() => {
+    const active = settings.musicOn && (intro || phase === "question" || phase === "reveal");
+    if (active) startMusic();
+    else stopMusic();
+  }, [settings.musicOn, intro, phase]);
+  useEffect(() => () => stopMusic(), []); // stop on unmount
 
   // ── INTRO / TITLE CARD ────────────────────────────────────────────────────
   if (intro) {
@@ -280,6 +294,7 @@ export default function QuizGame({ category }: { category: Category }) {
           paused={engine.paused}
           autoPlay={autoPlay}
           soundOn={settings.soundOn}
+          musicOn={settings.musicOn}
           onTogglePause={engine.togglePause}
           onPrev={engine.prev}
           onNext={engine.next}
@@ -287,6 +302,7 @@ export default function QuizGame({ category }: { category: Category }) {
           onReplaySound={() => playSfx("reveal", settings.soundOn)}
           onToggleAuto={() => setAutoPlay((v) => !v)}
           onToggleSound={() => patchSettings({ soundOn: !settings.soundOn })}
+          onToggleMusic={() => patchSettings({ musicOn: !settings.musicOn })}
           onToggleFullscreen={toggleFullscreen}
           onHideControls={() => setRecording(true)}
           onExit={exitToSetup}

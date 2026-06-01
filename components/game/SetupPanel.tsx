@@ -163,6 +163,9 @@ export default function SetupPanel({
           <Chip active={settings.soundOn} onClick={() => onChange({ soundOn: !settings.soundOn })}>
             {settings.soundOn ? "🔊 Suara ON" : "🔇 Suara OFF"}
           </Chip>
+          <Chip active={settings.musicOn} onClick={() => onChange({ musicOn: !settings.musicOn })}>
+            {settings.musicOn ? "🎵 Musik ON" : "🎶 Musik OFF"}
+          </Chip>
           <Chip active={autoPlay} onClick={() => onAutoPlayChange(!autoPlay)}>
             {autoPlay ? "🤖 Auto-Play ON" : "🎬 Auto-Play OFF"}
           </Chip>

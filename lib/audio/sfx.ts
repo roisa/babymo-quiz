@@ -67,6 +67,11 @@ export function unlockAudio(): void {
   getCtx();
 }
 
+/** Shared AudioContext, so background music and SFX use one graph. */
+export function getAudioContext(): AudioContext | null {
+  return getCtx();
+}
+
 export function playSfx(name: SfxName, enabled = true): void {
   if (!enabled) return;
   const audio = getCtx();
