@@ -21,12 +21,14 @@ import CountdownBar from "./CountdownBar";
 import ControlBar from "./ControlBar";
 import SetupPanel from "./SetupPanel";
 import YouTubePanel from "./YouTubePanel";
-import Mascot from "./Mascot";
+import IntroCard from "./IntroCard";
+import OutroCard from "./OutroCard";
 
 export default function QuizGame({ category }: { category: Category }) {
   const [settings, setSettings] = useState<QuizSettings>(DEFAULT_SETTINGS);
   const [autoPlay, setAutoPlay] = useState(false);
   const [recording, setRecording] = useState(false); // "hide controls" mode
+  const [intro, setIntro] = useState(false); // showing the title / countdown card
   const stageRef = useRef<HTMLDivElement>(null);
 
   const onSfx = useCallback(
@@ -60,13 +62,20 @@ export default function QuizGame({ category }: { category: Category }) {
         setRecording(true);
         enterFullscreen();
       }
-      engine.start();
+      // Roll the branded intro / countdown card; it starts the engine on done.
+      setIntro(true);
     },
-    [engine, enterFullscreen],
+    [enterFullscreen],
   );
+
+  const finishIntro = useCallback(() => {
+    setIntro(false);
+    engine.start();
+  }, [engine]);
 
   const exitToSetup = useCallback(() => {
     setRecording(false);
+    setIntro(false);
     if (document.fullscreenElement) document.exitFullscreen?.().catch(() => {});
     engine.restart();
   }, [engine]);
@@ -126,6 +135,18 @@ export default function QuizGame({ category }: { category: Category }) {
     return () => document.body.classList.remove("recording-mode");
   }, [recording]);
 
+  // ── INTRO / TITLE CARD ────────────────────────────────────────────────────
+  if (intro) {
+    return (
+      <IntroCard
+        category={category}
+        difficulty={settings.difficulty}
+        soundOn={settings.soundOn}
+        onDone={finishIntro}
+      />
+    );
+  }
+
   // ── SETUP ────────────────────────────────────────────────────────────────
   if (phase === "idle") {
     return (
@@ -151,41 +172,38 @@ export default function QuizGame({ category }: { category: Category }) {
         <OceanBackground />
         <Confetti active count={120} />
         <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-5 p-5 text-center">
-          <Mascot size={140} mood="cheer" />
-          <h1 className="display text-5xl text-sunny text-stroke md:text-7xl">Selesai! 🎉</h1>
-          <div className="glass rounded-3xl border-2 border-white/30 px-8 py-5">
-            <p className="display text-2xl text-foam md:text-3xl">Skormu</p>
-            <p className="display text-6xl text-sunny text-stroke md:text-8xl">
-              {engine.score}
-              <span className="text-3xl text-foam/80 md:text-5xl">/{engine.total}</span>
-            </p>
-            <p className="display mt-1 text-xl text-aqua md:text-2xl">{pct}% benar</p>
-          </div>
+          {/* Clean branded end card — stays as the final frame while recording. */}
+          <OutroCard score={engine.score} total={engine.total} />
 
-          <YouTubePanel category={category} items={engine.pool} difficulty={settings.difficulty} />
+          {/* Creator tools — hidden in recording mode so the outro stays clean. */}
+          <div className="hide-on-record flex w-full flex-col items-center gap-5">
+            <p className="display text-xl text-aqua md:text-2xl">{pct}% benar</p>
 
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <button
-              type="button"
-              onClick={() => handleStart(recording)}
-              className="display rounded-3xl border-4 border-[#1b7a44] bg-[var(--color-easy)] px-6 py-3 text-2xl text-deep transition-transform active:scale-95"
-              style={{ boxShadow: "0 8px 0 rgba(3,32,74,0.35)" }}
-            >
-              🔁 Main Lagi
-            </button>
-            <button
-              type="button"
-              onClick={exitToSetup}
-              className="display rounded-3xl border-4 border-white/30 bg-white/15 px-6 py-3 text-xl text-foam transition-transform active:scale-95"
-            >
-              ⚙️ Ubah Pengaturan
-            </button>
-            <Link
-              href="/"
-              className="display rounded-3xl border-4 border-white/30 bg-white/15 px-6 py-3 text-xl text-foam transition-transform active:scale-95"
-            >
-              🏠 Beranda
-            </Link>
+            <YouTubePanel category={category} items={engine.pool} difficulty={settings.difficulty} />
+
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <button
+                type="button"
+                onClick={() => handleStart(recording)}
+                className="display rounded-3xl border-4 border-[#1b7a44] bg-[var(--color-easy)] px-6 py-3 text-2xl text-deep transition-transform active:scale-95"
+                style={{ boxShadow: "0 8px 0 rgba(3,32,74,0.35)" }}
+              >
+                🔁 Main Lagi
+              </button>
+              <button
+                type="button"
+                onClick={exitToSetup}
+                className="display rounded-3xl border-4 border-white/30 bg-white/15 px-6 py-3 text-xl text-foam transition-transform active:scale-95"
+              >
+                ⚙️ Ubah Pengaturan
+              </button>
+              <Link
+                href="/"
+                className="display rounded-3xl border-4 border-white/30 bg-white/15 px-6 py-3 text-xl text-foam transition-transform active:scale-95"
+              >
+                🏠 Beranda
+              </Link>
+            </div>
           </div>
         </div>
       </div>
