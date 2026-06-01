@@ -84,6 +84,8 @@ export interface QuizSettings {
   /** Number of questions in the session (clamped to the available pool). */
   questionCount: number;
   soundOn: boolean;
+  /** Looping background music during play. */
+  musicOn: boolean;
 }
 
 export const DEFAULT_SETTINGS: QuizSettings = {
@@ -93,6 +95,7 @@ export const DEFAULT_SETTINGS: QuizSettings = {
   durationSec: 15,
   questionCount: 10,
   soundOn: true,
+  musicOn: false,
 };
 
 /** Lifecycle phases of a single question. */

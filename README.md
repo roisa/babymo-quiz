@@ -13,8 +13,10 @@ QuickTime, and produce long-form "Guess The Sea Animal" videos for YouTube.
 ## ✨ Features
 
 - **Flagship mode:** _Guess The Sea Animal_ (Tebak Hewan Laut) — 50+ animals.
-- **Reusable quiz engine** that is category-agnostic (Sea Animals today; Farm
-  Animals, Dinosaurs, Flags, … drop-in tomorrow).
+- **Second mode:** _Guess The Farm Animal_ (Tebak Hewan Ternak) — 30 animals.
+- **Reusable quiz engine** that is category-agnostic (Sea & Farm Animals today;
+  Dinosaurs, Flags, Space, … drop-in tomorrow).
+- **Background music:** optional gentle looping tune (synthesized, no files).
 - **Difficulty tiers:** Mudah · Sedang · Sulit · Mustahil.
 - **7 answer modes:** Multiple choice · Image · Silhouette · Blur · Zoom ·
   Emoji clues · Fun-fact clues.
@@ -45,6 +47,7 @@ QuickTime, and produce long-form "Guess The Sea Animal" videos for YouTube.
 | `R` or `Enter` | Reveal answer |
 | `S` | Replay reveal sound |
 | `A` | Toggle auto-play |
+| `M` | Toggle background music |
 | `F` | Toggle full-screen |
 | `H` | Hide controls (recording mode) |
 | `Esc` | Show controls again |

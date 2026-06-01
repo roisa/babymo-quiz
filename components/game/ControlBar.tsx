@@ -7,6 +7,7 @@ interface Props {
   paused: boolean;
   autoPlay: boolean;
   soundOn: boolean;
+  musicOn: boolean;
   onTogglePause: () => void;
   onPrev: () => void;
   onNext: () => void;
@@ -14,6 +15,7 @@ interface Props {
   onReplaySound: () => void;
   onToggleAuto: () => void;
   onToggleSound: () => void;
+  onToggleMusic: () => void;
   onToggleFullscreen: () => void;
   onHideControls: () => void;
   onExit: () => void;
@@ -63,6 +65,7 @@ export default function ControlBar(props: Props) {
     paused,
     autoPlay,
     soundOn,
+    musicOn,
     onTogglePause,
     onPrev,
     onNext,
@@ -70,6 +73,7 @@ export default function ControlBar(props: Props) {
     onReplaySound,
     onToggleAuto,
     onToggleSound,
+    onToggleMusic,
     onToggleFullscreen,
     onHideControls,
     onExit,
@@ -90,12 +94,13 @@ export default function ControlBar(props: Props) {
           {autoPlay ? "🤖" : "🎬"}
         </Btn>
         <Btn label={soundOn ? "Bunyi ON" : "Bunyi OFF"} onClick={onToggleSound}>{soundOn ? "🔊" : "🔇"}</Btn>
+        <Btn label={musicOn ? "Musik ON" : "Musik (M)"} onClick={onToggleMusic} accent={musicOn}>{musicOn ? "🎵" : "🎶"}</Btn>
         <Btn label="Layar Penuh (F)" onClick={onToggleFullscreen}>⛶</Btn>
         <Btn label="Sembunyikan (H)" onClick={onHideControls}>🙈</Btn>
         <Btn label="Keluar" onClick={onExit}>✖️</Btn>
       </div>
       <p className="hide-on-record text-center text-xs text-foam/70 md:text-sm">
-        Pintasan: <b>Spasi</b> jeda · <b>←/→</b> soal · <b>R</b> jawab · <b>S</b> suara · <b>A</b> auto · <b>F</b> layar penuh · <b>H</b> sembunyi
+        Pintasan: <b>Spasi</b> jeda · <b>←/→</b> soal · <b>R</b> jawab · <b>S</b> suara · <b>A</b> auto · <b>M</b> musik · <b>F</b> layar penuh · <b>H</b> sembunyi
       </p>
     </div>
   );

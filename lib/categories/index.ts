@@ -7,13 +7,14 @@
 // ───────────────────────────────────────────────────────────────────────────
 
 import seaAnimals from "@/data/sea-animals.json";
+import farmAnimals from "@/data/farm-animals.json";
 import type { Category } from "@/lib/engine/types";
 
 const SEA_ANIMALS = seaAnimals as Category;
+const FARM_ANIMALS = farmAnimals as Category;
 
 /** Placeholder cards for game types the architecture already supports. */
 const UPCOMING: Pick<Category, "id" | "title" | "emoji" | "blurb">[] = [
-  { id: "farm-animals", title: "Hewan Ternak", emoji: "🐄", blurb: "Sapi, ayam, bebek, dan teman-temannya." },
   { id: "dinosaurs", title: "Dinosaurus", emoji: "🦕", blurb: "Raksasa purba yang seru ditebak!" },
   { id: "birds", title: "Burung", emoji: "🦜", blurb: "Burung warna-warni dari seluruh dunia." },
   { id: "insects", title: "Serangga", emoji: "🐝", blurb: "Si kecil yang menakjubkan." },
@@ -27,6 +28,7 @@ const UPCOMING: Pick<Category, "id" | "title" | "emoji" | "blurb">[] = [
 
 export const CATEGORIES: Category[] = [
   SEA_ANIMALS,
+  FARM_ANIMALS,
   ...UPCOMING.map((u) => ({
     ...u,
     headline: "SEGERA HADIR...",

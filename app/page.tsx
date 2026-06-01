@@ -59,7 +59,7 @@ export default function HomePage() {
                 </div>
               );
               return c.available ? (
-                <Link key={c.id} href="/play/" className="active:scale-95">
+                <Link key={c.id} href={`/play/${c.id}/`} className="active:scale-95">
                   {card}
                 </Link>
               ) : (
