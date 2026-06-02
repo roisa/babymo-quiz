@@ -72,6 +72,7 @@ export function useQuizEngine(
   const pausedRef = useRef(false);
   const lastTickSecRef = useRef<number>(-1);
   const revealAtRef = useRef<number>(0); // for auto-play reveal hold
+  const indexRef = useRef(0); // navigation source of truth (avoids nested setState)
 
   const current = pool[index];
   const total = pool.length;
@@ -100,6 +101,7 @@ export function useQuizEngine(
 
   const goToQuestion = useCallback(
     (i: number) => {
+      indexRef.current = i;
       setIndex(i);
       setSelected(null);
       setPhase("question");
@@ -119,6 +121,7 @@ export function useQuizEngine(
       setPhase("complete");
       return;
     }
+    indexRef.current = 0;
     setIndex(0);
     setSelected(null);
     setPhase("question");
@@ -133,6 +136,7 @@ export function useQuizEngine(
   const restart = useCallback(() => {
     stopLoop();
     setPhase("idle");
+    indexRef.current = 0;
     setIndex(0);
     setScore(0);
   }, [stopLoop]);
@@ -147,24 +151,17 @@ export function useQuizEngine(
   }, [onSfx]);
 
   const next = useCallback(() => {
-    setIndex((i) => {
-      const ni = i + 1;
-      if (ni >= total) {
-        setPhase("complete");
-        onSfx?.("complete");
-        return i;
-      }
+    const ni = indexRef.current + 1;
+    if (ni >= total) {
+      setPhase("complete");
+      onSfx?.("complete");
+    } else {
       goToQuestion(ni);
-      return i; // goToQuestion already set the index
-    });
+    }
   }, [total, goToQuestion, onSfx]);
 
   const prev = useCallback(() => {
-    setIndex((i) => {
-      const pi = Math.max(0, i - 1);
-      goToQuestion(pi);
-      return i;
-    });
+    goToQuestion(Math.max(0, indexRef.current - 1));
   }, [goToQuestion]);
 
   const pause = useCallback(() => {
