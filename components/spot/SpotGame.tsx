@@ -330,7 +330,7 @@ export default function SpotGame() {
       </header>
 
       {/* CENTER — grid */}
-      <main className="flex min-h-0 flex-1 items-center justify-center px-3 py-2">
+      <main className="flex min-h-0 flex-1 items-center justify-center px-3 py-2 md:px-8 md:py-3">
         <SpotGrid
           round={round}
           revealed={revealed}
@@ -359,12 +359,12 @@ export default function SpotGame() {
         </div>
       )}
 
-      {/* BOTTOM — progress bar */}
-      <footer className="shrink-0 px-4 pb-2 md:px-6">
-        <div className="mx-auto h-4 max-w-3xl overflow-hidden rounded-full bg-black/10 md:h-5">
+      {/* BOTTOM — progress bar (extra bottom padding clears the floating controls) */}
+      <footer className="shrink-0 px-4 pb-16 md:px-8 md:pb-20">
+        <div className="mx-auto h-4 max-w-4xl overflow-hidden rounded-full bg-black/10 md:h-6">
           <div
-            className="h-full rounded-full"
-            style={{ width: `${frac * 100}%`, background: barColor, boxShadow: `0 0 12px ${barColor}` }}
+            className="h-full rounded-full transition-none"
+            style={{ width: `${frac * 100}%`, background: barColor, boxShadow: `0 0 14px ${barColor}` }}
           />
         </div>
       </footer>

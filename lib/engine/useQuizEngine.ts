@@ -42,8 +42,13 @@ export interface QuizEngine {
 }
 
 function buildChoices(animal: Animal): string[] {
-  const set = new Set<string>([animal.name, ...animal.answerChoices]);
-  return shuffle([...set]).slice(0, 4);
+  // Always include the correct answer, pull up to 3 random distractors, then
+  // shuffle so the correct answer lands in a random position every question.
+  const distractors = sample(
+    animal.answerChoices.filter((c) => c !== animal.name),
+    3,
+  );
+  return shuffle([animal.name, ...distractors]);
 }
 
 export function useQuizEngine(

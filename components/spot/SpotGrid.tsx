@@ -31,8 +31,10 @@ export default function SpotGrid({
       className="ios-glass mx-auto grid w-full rounded-[2rem] p-2 sm:p-3"
       style={{
         gridTemplateColumns: `repeat(${round.cols}, minmax(0, 1fr))`,
-        gap: "clamp(2px, 0.5vw, 10px)",
-        maxWidth: "min(94vw, 150vh)",
+        gap: "clamp(2px, 0.5vw, 12px)",
+        // Fit the 16:9 stage: cap width so the grid's height (width × rows/cols)
+        // never exceeds the available vertical space, and never gets too wide.
+        maxWidth: `min(94vw, ${((round.cols / round.rows) * 62).toFixed(2)}vh)`,
       }}
       role="grid"
       aria-label={round.puzzle.title}

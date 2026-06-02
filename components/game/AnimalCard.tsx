@@ -47,7 +47,7 @@ export default function AnimalCard({
   return (
     <div className="relative flex h-full w-full items-center justify-center">
       <div
-        className="glass relative flex aspect-square w-full max-w-[min(60vh,560px)] items-center justify-center overflow-hidden rounded-3xl border-4 border-white/40"
+        className="glass relative flex aspect-square w-full max-w-[min(62vh,680px)] items-center justify-center overflow-hidden rounded-3xl border-4 border-white/40"
         style={{ boxShadow: "0 20px 0 rgba(3,32,74,0.35), inset 0 0 60px rgba(255,255,255,0.12)" }}
       >
         {/* the subject */}
@@ -69,7 +69,7 @@ export default function AnimalCard({
               <EmojiArt
                 emoji={animal.emoji}
                 alt={revealed ? animal.name : "Tebak hewannya"}
-                style={{ width: "clamp(160px, 38vh, 460px)", height: "clamp(160px, 38vh, 460px)" }}
+                style={{ width: "clamp(180px, 40vh, 560px)", height: "clamp(180px, 40vh, 560px)" }}
               />
             )}
           </div>
