@@ -149,6 +149,38 @@ export default function QuizGame({ category }: { category: Category }) {
   }, [settings.musicOn, intro, phase]);
   useEffect(() => () => stopMusic(), []); // stop on unmount
 
+  // URL-param auto-start: lets the render script and OBS launch a fully
+  // configured session hands-free, e.g.
+  //   /play/sea-animals/?auto=1&difficulty=Mudah&mode=silhouette&duration=12&count=20&music=1
+  // `auto=1` runs a recording session (auto-play + hidden controls); `start=1`
+  // just starts in manual mode. The engine starts after the intro, so the
+  // settings patch below is always applied before the first question.
+  const bootRef = useRef(false);
+  useEffect(() => {
+    if (bootRef.current) return;
+    bootRef.current = true;
+    const q = new URLSearchParams(window.location.search);
+    if ([...q.keys()].length === 0) return;
+
+    const patch: Partial<QuizSettings> = {};
+    const diff = q.get("difficulty");
+    if (diff) patch.difficulty = diff as QuizSettings["difficulty"];
+    const mode = q.get("mode");
+    if (mode) patch.answerMode = mode as QuizSettings["answerMode"];
+    const dur = parseInt(q.get("duration") ?? "", 10);
+    if (!Number.isNaN(dur)) patch.durationSec = Math.max(3, dur);
+    const cnt = parseInt(q.get("count") ?? "", 10);
+    if (!Number.isNaN(cnt)) patch.questionCount = Math.max(1, cnt);
+    const order = q.get("order");
+    if (order === "sequential" || order === "random") patch.order = order;
+    if (q.get("music") != null) patch.musicOn = q.get("music") === "1";
+    if (q.get("sound") != null) patch.soundOn = q.get("sound") !== "0";
+    if (Object.keys(patch).length) setSettings((s) => ({ ...s, ...patch }));
+
+    if (q.get("auto") === "1") handleStart(true);
+    else if (q.get("start") === "1") handleStart(false);
+  }, [handleStart]);
+
   // ── INTRO / TITLE CARD ────────────────────────────────────────────────────
   if (intro) {
     return (
@@ -182,7 +214,7 @@ export default function QuizGame({ category }: { category: Category }) {
   if (phase === "complete") {
     const pct = engine.total > 0 ? Math.round((engine.score / engine.total) * 100) : 0;
     return (
-      <div className="relative min-h-[100dvh] w-full overflow-hidden">
+      <div className="relative min-h-[100dvh] w-full overflow-hidden" data-testid="complete">
         <OceanBackground />
         <Confetti active count={120} />
         <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-5 p-5 text-center">

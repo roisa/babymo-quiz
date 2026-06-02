@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { withBase } from "@/lib/basePath";
 import type { Animal, AnswerMode } from "@/lib/engine/types";
+import EmojiArt from "./EmojiArt";
 
 /**
  * The big central display card. Renders the subject with the visual treatment
@@ -64,9 +65,12 @@ export default function AnimalCard({
                 className="h-auto w-[clamp(220px,42vh,420px)] object-contain"
               />
             ) : (
-              <span className="select-none leading-none" style={{ fontSize: "clamp(120px, 32vh, 320px)" }}>
-                {animal.emoji}
-              </span>
+              // SVG emoji art — stays crisp even when blown up to fill a 4K card.
+              <EmojiArt
+                emoji={animal.emoji}
+                alt={revealed ? animal.name : "Tebak hewannya"}
+                style={{ width: "clamp(160px, 38vh, 460px)", height: "clamp(160px, 38vh, 460px)" }}
+              />
             )}
           </div>
         )}
@@ -75,13 +79,15 @@ export default function AnimalCard({
         {hideSubject && mode === "emoji" && (
           <div className="flex flex-wrap items-center justify-center gap-4 px-6">
             {(animal.emojiClues ?? [animal.emoji]).map((e, i) => (
-              <span
+              <EmojiArt
                 key={i}
-                className="select-none"
-                style={{ fontSize: "clamp(64px,16vh,150px)", animation: `floaty ${4 + i}s ease-in-out infinite` }}
-              >
-                {e}
-              </span>
+                emoji={e}
+                style={{
+                  width: "clamp(64px,16vh,150px)",
+                  height: "clamp(64px,16vh,150px)",
+                  animation: `floaty ${4 + i}s ease-in-out infinite`,
+                }}
+              />
             ))}
           </div>
         )}

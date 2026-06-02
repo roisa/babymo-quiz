@@ -31,3 +31,7 @@ yarn-error.log*
 
 # TypeScript
 *.tsbuildinfo
+
+# Generated emoji SVGs (run `npm run emoji`) and rendered episodes
+public/emoji/
+episodes/

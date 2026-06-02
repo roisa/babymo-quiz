@@ -25,7 +25,11 @@ jobs:
           node-version: 22
           cache: npm
 
-      - run: npm ci
+      - name: Install dependencies
+        # The render script's Playwright browsers aren't needed to build the site.
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+        run: npm ci
 
       - name: Build static export
         env:
