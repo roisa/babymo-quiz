@@ -36,8 +36,9 @@ QuickTime, and produce long-form "Guess The Sea Animal" videos for YouTube.
   full-screen, hides controls, and runs the whole loop automatically.
 - **Content editor** at `/quiz-editor`: add/edit animals, upload images,
   Export/Import JSON.
-- **YouTube optimization:** auto-generated title ideas, description template,
-  and hashtags.
+- **YouTube optimization:** viral title ideas, description with comment CTA,
+  hashtags, on-screen engagement prompts + hype badges, and a **Thumbnail
+  Studio** (`/thumbnail`) that exports click-worthy 1280×720 PNG thumbnails.
 - **Accessibility:** huge high-contrast text, kid-friendly colors, readable
   from across the room (TV-friendly). Mobile friendly, desktop-optimized.
 

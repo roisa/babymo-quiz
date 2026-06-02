@@ -21,15 +21,21 @@ export default function OutroCard({ score, total }: { score: number; total: numb
         Skor kamu: <span className="text-sunny">{score}</span>
         <span className="text-foam/80">/{total}</span>
       </p>
+      <p className="display animate-[floaty_2.5s_ease-in-out_infinite] text-2xl text-sunny text-stroke md:text-3xl">
+        💬 Tulis skormu di komentar! 👇
+      </p>
       <div className="mt-1 flex flex-wrap items-center justify-center gap-3">
-        <span className="display rounded-full bg-[var(--color-coral)] px-6 py-3 text-2xl text-white md:text-3xl">
+        <span className="display rounded-full bg-[var(--color-coral)] px-6 py-3 text-2xl text-white shadow-lg md:text-3xl">
           👍 LIKE
         </span>
-        <span className="display rounded-full bg-[var(--color-extreme)] px-6 py-3 text-2xl text-white md:text-3xl">
+        <span
+          className="display rounded-full bg-[var(--color-extreme)] px-6 py-3 text-2xl text-white shadow-lg md:text-3xl"
+          style={{ animation: "floaty 2s ease-in-out infinite" }}
+        >
           🔔 SUBSCRIBE
         </span>
       </div>
-      <p className="display text-xl text-foam/90 md:text-2xl">Sampai jumpa di video berikutnya! 🐳</p>
+      <p className="display text-xl text-foam/90 md:text-2xl">Video baru setiap minggu — sampai jumpa! 🐳</p>
     </div>
   );
 }
