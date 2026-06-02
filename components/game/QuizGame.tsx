@@ -289,11 +289,15 @@ export default function QuizGame({ category }: { category: Category }) {
           </aside>
 
           <main className="flex min-h-0 flex-1 flex-col items-center justify-center gap-3">
-            <div className="flex min-h-0 w-full flex-1 items-center justify-center">
+            <div
+              key={`card-${current.id}`}
+              className="flex min-h-0 w-full flex-1 items-center justify-center"
+              style={{ animation: "var(--animate-pop-in)" }}
+            >
               <AnimalCard animal={current} mode={settings.answerMode} revealed={revealed} />
             </div>
             {showChoices && (
-              <div className="w-full max-w-3xl shrink-0">
+              <div key={`ans-${current.id}`} className="w-full max-w-3xl shrink-0">
                 <AnswerChoices
                   animal={current}
                   choices={engine.choices}

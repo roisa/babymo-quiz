@@ -41,6 +41,7 @@ export default function SpotGrid({
         // Fit the 16:9 stage: cap width so the grid's height (width × rows/cols)
         // never exceeds the available vertical space, and never gets too wide.
         maxWidth: `min(94vw, ${((round.cols / round.rows) * 62).toFixed(2)}vh)`,
+        animation: "spring-in 0.45s",
       }}
       role="grid"
       aria-label={round.title}
