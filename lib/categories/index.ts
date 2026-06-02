@@ -8,10 +8,12 @@
 
 import seaAnimals from "@/data/sea-animals.json";
 import farmAnimals from "@/data/farm-animals.json";
+import moExpressions from "@/data/mo-expressions.json";
 import type { Category } from "@/lib/engine/types";
 
 const SEA_ANIMALS = seaAnimals as Category;
 const FARM_ANIMALS = farmAnimals as Category;
+const MO_EXPRESSIONS = moExpressions as Category;
 
 /** Placeholder cards for game types the architecture already supports. */
 const UPCOMING: Pick<Category, "id" | "title" | "emoji" | "blurb">[] = [
@@ -29,6 +31,7 @@ const UPCOMING: Pick<Category, "id" | "title" | "emoji" | "blurb">[] = [
 export const CATEGORIES: Category[] = [
   SEA_ANIMALS,
   FARM_ANIMALS,
+  MO_EXPRESSIONS,
   ...UPCOMING.map((u) => ({
     ...u,
     headline: "SEGERA HADIR...",

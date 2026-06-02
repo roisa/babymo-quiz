@@ -10,13 +10,17 @@
 // ───────────────────────────────────────────────────────────────────────────
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { getSpotLevel, SPOT_PUZZLES, type SpotPuzzle } from "./puzzles";
-import { shuffle } from "@/lib/engine/shuffle";
+import { getSpotLevel, SPOT_PUZZLES } from "./puzzles";
+import { LABELED_POSES } from "./labeledPoses";
+import { shuffle, sample } from "@/lib/engine/shuffle";
 import type { SfxName } from "@/lib/audio/sfx";
 
 export const REVEAL_HOLD_SEC = 4;
 
 export type SpotPhase = "idle" | "question" | "reveal" | "complete";
+
+/** "odd" = find the different one; "match" = find the one doing the prompt. */
+export type SpotVariant = "odd" | "match";
 
 export interface SpotSettings {
   levelKey: string;
@@ -37,11 +41,20 @@ export const DEFAULT_SPOT_SETTINGS: SpotSettings = {
 };
 
 export interface SpotRound {
-  puzzle: SpotPuzzle;
-  oddIndex: number;
+  oddIndex: number; // the cell to find (odd one, or the prompt match)
   total: number;
   cols: number;
   rows: number;
+  // Display
+  title: string;
+  emoji: string;
+  funFact: string;
+  /** "odd" variant: the two pose files that fill / break the grid. */
+  baseFile?: string;
+  oddFile?: string;
+  /** "match" variant: a distinct pose per cell + the action to find. */
+  cellFiles?: string[];
+  promptLabel?: string;
 }
 
 export interface SpotEngine {
@@ -68,9 +81,9 @@ export interface SpotEngine {
 
 export function useSpotEngine(
   settings: SpotSettings,
-  opts: { autoPlay: boolean; onSfx?: (name: SfxName) => void },
+  opts: { autoPlay: boolean; onSfx?: (name: SfxName) => void; variant?: SpotVariant },
 ): SpotEngine {
-  const { autoPlay, onSfx } = opts;
+  const { autoPlay, onSfx, variant = "odd" } = opts;
 
   const [rounds, setRounds] = useState<SpotRound[]>([]);
   const [index, setIndex] = useState(0);
@@ -99,20 +112,53 @@ export function useSpotEngine(
   const buildRounds = useCallback((): SpotRound[] => {
     const level = getSpotLevel(settings.levelKey);
     const cells = level.cols * level.rows;
-    const pool = settings.order === "random" ? shuffle(SPOT_PUZZLES) : [...SPOT_PUZZLES];
-    const chosen: SpotPuzzle[] = [];
-    for (let i = 0; i < settings.roundCount; i++) {
-      chosen.push(pool[i % pool.length]!); // wrap if more rounds than puzzles
-    }
-    // Randomize the odd cell each round, never repeating the previous position.
+    const dims = { total: cells, cols: level.cols, rows: level.rows };
+
+    // The target cell, never repeating the previous round's position.
     let prev = -1;
-    return chosen.map((puzzle) => {
-      let oddIndex = Math.floor(Math.random() * cells);
-      while (cells > 1 && oddIndex === prev) oddIndex = Math.floor(Math.random() * cells);
-      prev = oddIndex;
-      return { puzzle, oddIndex, total: cells, cols: level.cols, rows: level.rows };
+    const pickIndex = () => {
+      let i = Math.floor(Math.random() * cells);
+      while (cells > 1 && i === prev) i = Math.floor(Math.random() * cells);
+      prev = i;
+      return i;
+    };
+
+    if (variant === "match") {
+      // Each cell shows a different pose; find the one doing the prompt action.
+      return Array.from({ length: settings.roundCount }, () => {
+        const target = LABELED_POSES[Math.floor(Math.random() * LABELED_POSES.length)]!;
+        const others = LABELED_POSES.filter((p) => p.file !== target.file);
+        const oddIndex = pickIndex();
+        const cellFiles = Array.from({ length: cells }, (_, i) =>
+          i === oddIndex ? target.file : sample(others, 1)[0]!.file,
+        );
+        return {
+          ...dims,
+          oddIndex,
+          cellFiles,
+          promptLabel: target.label,
+          title: "Mana Baby Mo?",
+          emoji: "🔎",
+          funFact: target.funFact,
+        };
+      });
+    }
+
+    // "odd" variant — a grid of one pose with a single different one.
+    const pool = settings.order === "random" ? shuffle(SPOT_PUZZLES) : [...SPOT_PUZZLES];
+    return Array.from({ length: settings.roundCount }, (_, i) => {
+      const puzzle = pool[i % pool.length]!;
+      return {
+        ...dims,
+        oddIndex: pickIndex(),
+        baseFile: puzzle.baseFile,
+        oddFile: puzzle.oddFile,
+        title: puzzle.title,
+        emoji: puzzle.emoji,
+        funFact: puzzle.funFact,
+      };
     });
-  }, [settings.levelKey, settings.order, settings.roundCount]);
+  }, [settings.levelKey, settings.order, settings.roundCount, variant]);
 
   const enterQuestion = useCallback(
     (i: number) => {

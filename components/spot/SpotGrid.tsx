@@ -4,6 +4,12 @@ import { withBase } from "@/lib/basePath";
 import { poseSrc } from "@/lib/spot/puzzles";
 import type { SpotRound } from "@/lib/spot/useSpotEngine";
 
+/** Pose file shown in cell `i` for either variant. */
+function cellFile(round: SpotRound, i: number): string {
+  if (round.cellFiles) return round.cellFiles[i]!;
+  return i === round.oddIndex ? round.oddFile! : round.baseFile!;
+}
+
 /**
  * The grid of Baby Mo poses. Every cell shows the base pose except the odd one.
  * On reveal the odd cell is spotlighted (scale + green ring + pulse) and the
@@ -37,7 +43,7 @@ export default function SpotGrid({
         maxWidth: `min(94vw, ${((round.cols / round.rows) * 62).toFixed(2)}vh)`,
       }}
       role="grid"
-      aria-label={round.puzzle.title}
+      aria-label={round.title}
     >
       {cells.map((i) => {
         const isOdd = i === round.oddIndex;
@@ -73,7 +79,7 @@ export default function SpotGrid({
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={withBase(poseSrc(isOdd ? round.puzzle.oddFile : round.puzzle.baseFile))}
+              src={withBase(poseSrc(cellFile(round, i)))}
               alt="Baby Mo"
               draggable={false}
               className="h-full w-full select-none object-contain"

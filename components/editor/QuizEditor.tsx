@@ -175,7 +175,7 @@ export default function QuizEditor() {
               ))}
             </select>
           </L>
-          <L label="Habitat"><I value={draft.habitat} onChange={(v) => setDraft((d) => ({ ...d, habitat: v }))} /></L>
+          <L label="Habitat (opsional)"><I value={draft.habitat ?? ""} onChange={(v) => setDraft((d) => ({ ...d, habitat: v }))} /></L>
           <L label="Emoji petunjuk (pisah spasi)">
             <I
               value={(draft.emojiClues ?? []).join(" ")}

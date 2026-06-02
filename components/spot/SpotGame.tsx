@@ -6,6 +6,7 @@ import {
   DEFAULT_SPOT_SETTINGS,
   useSpotEngine,
   type SpotSettings,
+  type SpotVariant,
 } from "@/lib/spot/useSpotEngine";
 import { SPOT_LEVELS } from "@/lib/spot/puzzles";
 import { playSfx, unlockAudio, type SfxName } from "@/lib/audio/sfx";
@@ -16,15 +17,23 @@ import SpotGrid from "./SpotGrid";
 
 const TIMER_PRESETS = [10, 15, 20];
 
-export default function SpotGame() {
+export default function SpotGame({ variant = "odd" }: { variant?: SpotVariant }) {
   const [settings, setSettings] = useState<SpotSettings>(DEFAULT_SPOT_SETTINGS);
   const [autoPlay, setAutoPlay] = useState(false);
   const [recording, setRecording] = useState(false);
   const [intro, setIntro] = useState(false);
   const [introN, setIntroN] = useState(3);
 
+  // Copy that differs between the two grid games.
+  const gameName = variant === "match" ? "Mana Baby Mo?" : "Temukan yang Beda";
+  const gameEmoji = variant === "match" ? "🔎" : "🔍";
+  const gameTagline =
+    variant === "match"
+      ? "Banyak Baby Mo dengan gaya berbeda. Temukan yang diminta secepat kilat!"
+      : "Semua Baby Mo terlihat sama… tapi satu berbeda. Temukan secepat kilat!";
+
   const onSfx = useCallback((n: SfxName) => playSfx(n, settings.soundOn), [settings.soundOn]);
-  const engine = useSpotEngine(settings, { autoPlay, onSfx });
+  const engine = useSpotEngine(settings, { autoPlay, onSfx, variant });
   const { phase } = engine;
 
   const patch = useCallback((p: Partial<SpotSettings>) => setSettings((s) => ({ ...s, ...p })), []);
@@ -137,8 +146,8 @@ export default function SpotGame() {
     return (
       <div className="ios relative flex min-h-[100dvh] w-full items-center justify-center overflow-hidden">
         <div className="flex flex-col items-center gap-5 text-center" style={{ animation: "spring-in 0.5s" }}>
-          <p className="text-2xl font-semibold text-[var(--ios-ink-soft)] md:text-3xl">Temukan yang Beda</p>
-          <h1 className="display text-5xl text-[var(--ios-ink)] md:text-7xl">🔍 Siap?</h1>
+          <p className="text-2xl font-semibold text-[var(--ios-ink-soft)] md:text-3xl">{gameName}</p>
+          <h1 className="display text-5xl text-[var(--ios-ink)] md:text-7xl">{gameEmoji} Siap?</h1>
           <div
             key={introN}
             className="ios-glass flex h-36 w-36 items-center justify-center rounded-full text-7xl font-extrabold text-[var(--ios-blue)] md:h-48 md:w-48 md:text-9xl"
@@ -146,7 +155,7 @@ export default function SpotGame() {
           >
             {introN > 0 ? introN : "🎬"}
           </div>
-          <p className="text-[var(--ios-ink-soft)]">Bersiap menemukan Baby Mo yang berbeda…</p>
+          <p className="text-[var(--ios-ink-soft)]">Bersiap mencari Baby Mo…</p>
         </div>
       </div>
     );
@@ -160,10 +169,8 @@ export default function SpotGame() {
           <header className="text-center">
             <BabyMoLogo size={64} showText={false} className="mx-auto mb-2" />
             <p className="text-xl font-semibold text-[var(--ios-ink-soft)] md:text-2xl">Baby Mo Quiz</p>
-            <h1 className="display text-5xl text-[var(--ios-ink)] md:text-7xl">Temukan yang Beda 🔍</h1>
-            <p className="mt-2 text-lg text-[var(--ios-ink-soft)] md:text-xl">
-              Semua Baby Mo terlihat sama… tapi satu berbeda. Temukan secepat kilat!
-            </p>
+            <h1 className="display text-5xl text-[var(--ios-ink)] md:text-7xl">{gameName} {gameEmoji}</h1>
+            <p className="mt-2 text-lg text-[var(--ios-ink-soft)] md:text-xl">{gameTagline}</p>
           </header>
 
           <div className="ios-glass flex flex-col gap-5 rounded-[2rem] p-5 md:p-7">
@@ -257,7 +264,7 @@ export default function SpotGame() {
   // ── COMPLETE ────────────────────────────────────────────────────────────────
   if (phase === "complete") {
     const pct = engine.total > 0 ? Math.round((engine.score / engine.total) * 100) : 0;
-    const title = `🔍 Temukan Baby Mo yang Beda! ${engine.total} Tantangan Seru | Baby Mo Quiz`;
+    const title = `${gameEmoji} ${gameName} ${engine.total} Tantangan Seru Untuk Anak | Baby Mo Quiz`;
     return (
       <div className="ios relative min-h-[100dvh] w-full overflow-hidden" data-testid="complete">
         <Confetti active count={120} />
@@ -311,10 +318,12 @@ export default function SpotGame() {
           <BabyMoLogo size={44} showText={false} />
           <div className="min-w-0">
             <h1 className="display truncate text-2xl text-[var(--ios-ink)] sm:text-3xl md:text-4xl">
-              {round.puzzle.emoji} {round.puzzle.title}
+              {round.emoji} {round.title}
             </h1>
             <p className="text-sm font-semibold text-[var(--ios-ink-soft)] md:text-base">
-              Temukan Baby Mo yang berbeda! 🔍
+              {variant === "match"
+                ? `Cari Baby Mo yang ${round.promptLabel}! 🔎`
+                : "Temukan Baby Mo yang berbeda! 🔍"}
             </p>
           </div>
         </div>
@@ -358,7 +367,7 @@ export default function SpotGame() {
               <p className="display text-xl text-[var(--ios-green)] md:text-2xl">
                 {engine.found ? "Ketemu! Hebat! 🎉" : "Itu dia Baby Mo yang beda!"}
               </p>
-              <p className="text-sm text-[var(--ios-ink-soft)] md:text-base">💡 {round.puzzle.funFact}</p>
+              <p className="text-sm text-[var(--ios-ink-soft)] md:text-base">💡 {round.funFact}</p>
             </div>
           </div>
         </div>
