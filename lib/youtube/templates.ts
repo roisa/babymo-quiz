@@ -30,10 +30,10 @@ export function generateYouTubeMeta(
   const word = DIFF_WORD[difficulty];
 
   const titles = [
-    `${category.emoji} Tebak Hewan Laut! ${count} Quiz ${word} Untuk Anak | Baby Mo Quiz`,
-    `${category.emoji} ${count} Tebak-Tebakan Hewan Laut Seru | Belajar Sambil Bermain | Baby Mo Quiz`,
-    `Bisa Tebak Semua? 🐠 Quiz Hewan Laut ${word} | Baby Mo Quiz`,
-    `${category.emoji} TEBAK HEWANNYA! Quiz Hewan Laut untuk Anak & Balita | Baby Mo Quiz`,
+    `${category.emoji} ${category.title}! ${count} Quiz ${word} Untuk Anak | Baby Mo Quiz`,
+    `${category.emoji} ${count} ${category.title} Seru | Belajar Sambil Bermain | Baby Mo Quiz`,
+    `Bisa Tebak Semua? ${category.emoji} ${category.title} ${word} | Baby Mo Quiz`,
+    `${category.emoji} ${category.headline} ${category.title} untuk Anak & Balita | Baby Mo Quiz`,
   ];
 
   const list = items
@@ -43,7 +43,7 @@ export function generateYouTubeMeta(
   const description = [
     `${category.emoji} Selamat datang di Baby Mo Quiz!`,
     "",
-    `Ayo tebak ${count} hewan laut dalam video seru ini! Cocok untuk anak-anak dan balita yang sedang belajar mengenal hewan. Tonton, tebak, dan belajar bersama Baby Mo! 🐳`,
+    `Ayo ikuti ${count} tebakan seru dalam video ini! Cocok untuk anak-anak dan balita. Tonton, tebak, dan belajar bersama Baby Mo! 🐳`,
     "",
     "🎯 Cara bermain:",
     "1. Lihat gambar atau petunjuknya",

@@ -50,8 +50,8 @@ export interface Animal {
   difficulty: Difficulty;
   /** Kid-friendly fun fact, revealed at the end. */
   funFact: string;
-  /** Where it lives, e.g. "Terumbu karang". */
-  habitat: string;
+  /** Where it lives, e.g. "Terumbu karang". Optional (not all categories use it). */
+  habitat?: string;
   /** Wrong options for multiple-choice. The correct name is added automatically. */
   answerChoices: string[];
 }

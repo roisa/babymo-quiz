@@ -1,0 +1,164 @@
+{
+  "id": "mo-expressions",
+  "title": "Tebak Ekspresi Baby Mo",
+  "headline": "TEBAK EKSPRESINYA...",
+  "emoji": "😄",
+  "blurb": "Tebak ekspresi & gaya lucu Baby Mo!",
+  "available": true,
+  "items": [
+    {
+      "id": "mo-senang",
+      "name": "Senang",
+      "nameEn": "Happy",
+      "image": "/baby-mo-poses/baby-mo-pose-31.png",
+      "emoji": "😄",
+      "emojiClues": ["😄", "💛", "🙌"],
+      "difficulty": "Mudah",
+      "funFact": "Saat senang, tubuh kita melepaskan hormon bahagia bernama endorfin!",
+      "answerChoices": ["Sedih", "Takjub", "Malu"]
+    },
+    {
+      "id": "mo-sedih",
+      "name": "Sedih",
+      "nameEn": "Sad",
+      "image": "/baby-mo-poses/baby-mo-pose-37.png",
+      "emoji": "😢",
+      "emojiClues": ["😢", "💧", "🫂"],
+      "difficulty": "Mudah",
+      "funFact": "Menangis itu wajar — dan memeluk teman yang sedih membuatnya lebih baik.",
+      "answerChoices": ["Senang", "Gembira", "Keren"]
+    },
+    {
+      "id": "mo-berlari",
+      "name": "Berlari",
+      "nameEn": "Running",
+      "image": "/baby-mo-poses/baby-mo-run.png",
+      "emoji": "🏃",
+      "emojiClues": ["🏃", "💨", "🏞️"],
+      "difficulty": "Mudah",
+      "funFact": "Berlari melatih keseimbangan dan membuat jantung sehat!",
+      "answerChoices": ["Berpikir", "Melambai", "Oke"]
+    },
+    {
+      "id": "mo-gembira",
+      "name": "Gembira",
+      "nameEn": "Cheering",
+      "image": "/baby-mo-poses/baby-mo-yeyy.png",
+      "emoji": "🎉",
+      "emojiClues": ["🎉", "🙌", "✨"],
+      "difficulty": "Mudah",
+      "funFact": "Melompat kegirangan adalah cara tubuh merayakan rasa bahagia!",
+      "answerChoices": ["Sedih", "Berpikir", "Malu"]
+    },
+    {
+      "id": "mo-ide",
+      "name": "Punya Ide",
+      "nameEn": "Has an Idea",
+      "image": "/baby-mo-poses/baby-mo-idea.png",
+      "emoji": "💡",
+      "emojiClues": ["💡", "☝️", "✨"],
+      "difficulty": "Sedang",
+      "funFact": "Saat dapat ide, otak kita seperti menyalakan lampu kecil!",
+      "answerChoices": ["Oke", "Takjub", "Semangat"]
+    },
+    {
+      "id": "mo-takjub",
+      "name": "Takjub",
+      "nameEn": "Amazed",
+      "image": "/baby-mo-poses/baby-mo-wow.png",
+      "emoji": "😮",
+      "emojiClues": ["😮", "✨", "👀"],
+      "difficulty": "Sedang",
+      "funFact": "Rasa takjub membuat kita ingin terus belajar hal baru!",
+      "answerChoices": ["Senang", "Malu", "Berlari"]
+    },
+    {
+      "id": "mo-oke",
+      "name": "Oke",
+      "nameEn": "Okay",
+      "image": "/baby-mo-poses/baby-mo-ok.png",
+      "emoji": "👌",
+      "emojiClues": ["👌", "😊", "✅"],
+      "difficulty": "Sedang",
+      "funFact": "Tanda 'oke' dipakai di banyak negara untuk bilang 'semuanya baik'!",
+      "answerChoices": ["Semangat", "Punya Ide", "Keren"]
+    },
+    {
+      "id": "mo-terima-kasih",
+      "name": "Terima Kasih",
+      "nameEn": "Thankful",
+      "image": "/baby-mo-poses/baby-mo-thank-you.png",
+      "emoji": "🙏",
+      "emojiClues": ["🙏", "💕", "😊"],
+      "difficulty": "Sedang",
+      "funFact": "Mengucap terima kasih membuat kita dan orang lain lebih bahagia.",
+      "answerChoices": ["Oke", "Malu", "Takjub"]
+    },
+    {
+      "id": "mo-semangat",
+      "name": "Semangat",
+      "nameEn": "Cheer Up",
+      "image": "/baby-mo-poses/baby-mo-yes.png",
+      "emoji": "✊",
+      "emojiClues": ["✊", "🔥", "💪"],
+      "difficulty": "Sulit",
+      "funFact": "Mengepalkan tangan 'Yes!' menambah rasa percaya diri kita!",
+      "answerChoices": ["Gembira", "Keren", "Oke"]
+    },
+    {
+      "id": "mo-keren",
+      "name": "Keren",
+      "nameEn": "Cool",
+      "image": "/baby-mo-poses/baby-mo-alright.png",
+      "emoji": "🤙",
+      "emojiClues": ["🤙", "😎", "✨"],
+      "difficulty": "Sulit",
+      "funFact": "Gaya 'keren' santai ini disebut shaka, salam khas para peselancar!",
+      "answerChoices": ["Semangat", "Oke", "Gembira"]
+    },
+    {
+      "id": "mo-berpikir",
+      "name": "Berpikir",
+      "nameEn": "Thinking",
+      "image": "/baby-mo-poses/baby-mo-pose-20.png",
+      "emoji": "🤔",
+      "emojiClues": ["🤔", "💭", "🧠"],
+      "difficulty": "Sulit",
+      "funFact": "Memberi waktu untuk berpikir melatih kesabaran dan fokus.",
+      "answerChoices": ["Punya Ide", "Berlari", "Takjub"]
+    },
+    {
+      "id": "mo-malu",
+      "name": "Malu",
+      "nameEn": "Shy",
+      "image": "/baby-mo-poses/baby-mo-pose-09.png",
+      "emoji": "🙈",
+      "emojiClues": ["🙈", "😳", "💗"],
+      "difficulty": "Sulit",
+      "funFact": "Rasa malu itu normal dan bagian dari tumbuh kembang setiap anak.",
+      "answerChoices": ["Senang", "Melambai", "Berpikir"]
+    },
+    {
+      "id": "mo-mengedip",
+      "name": "Mengedip",
+      "nameEn": "Winking",
+      "image": "/baby-mo-poses/baby-mo-pose-05.png",
+      "emoji": "😉",
+      "emojiClues": ["😉", "✨", "😜"],
+      "difficulty": "Mustahil",
+      "funFact": "Mengedip satu mata sering berarti 'ini rahasia kita ya!'",
+      "answerChoices": ["Senang", "Melambai", "Keren"]
+    },
+    {
+      "id": "mo-melambai",
+      "name": "Melambai",
+      "nameEn": "Waving",
+      "image": "/baby-mo-poses/baby-mo-pose-06.png",
+      "emoji": "👋",
+      "emojiClues": ["👋", "😊", "💕"],
+      "difficulty": "Mustahil",
+      "funFact": "Melambaikan tangan adalah cara ramah menyapa dan berkata 'dah!'",
+      "answerChoices": ["Malu", "Mengedip", "Semangat"]
+    }
+  ]
+}

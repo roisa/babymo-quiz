@@ -6,6 +6,14 @@ import OceanBackground from "@/components/game/OceanBackground";
 import Mascot from "@/components/game/Mascot";
 import BabyMoLogo from "@/components/BabyMoLogo";
 
+// Baby Mo pose games (use the real character art).
+const MO_GAMES = [
+  { href: "/spot/", emoji: "🔍", title: "Temukan yang Beda", blurb: "Cari Baby Mo yang berbeda di antara keramaian." },
+  { href: "/cari/", emoji: "🔎", title: "Mana Baby Mo?", blurb: "Temukan Baby Mo yang melakukan gaya tertentu." },
+  { href: "/play/mo-expressions/", emoji: "😄", title: "Tebak Ekspresi", blurb: "Tebak ekspresi & gaya lucu Baby Mo." },
+  { href: "/play/mo-expressions/?mode=silhouette", emoji: "🌑", title: "Bayangan Mo", blurb: "Tebak pose Baby Mo dari bayangannya." },
+];
+
 export default function HomePage() {
   return (
     <div className="relative min-h-[100dvh] w-full overflow-hidden">
@@ -40,28 +48,27 @@ export default function HomePage() {
           </Link>
         </div>
 
-        {/* Featured: Spot the Odd One (fresh iOS-style mode) */}
+        {/* Featured: Baby Mo pose games */}
         <section className="w-full">
-          <h2 className="display mb-4 text-3xl text-foam text-stroke md:text-4xl">Mode Spesial</h2>
-          <Link href="/spot/" className="block active:scale-[0.98]">
-            <div className="glass flex flex-col items-center gap-3 rounded-3xl border-2 border-white/30 p-5 transition-transform sm:flex-row sm:gap-6 sm:text-left">
-              <span className="text-7xl" style={{ animation: "floaty 4s ease-in-out infinite" }}>🔍</span>
-              <div className="flex-1 text-center sm:text-left">
-                <span className="display text-2xl text-sunny md:text-3xl">Temukan yang Beda</span>
-                <p className="text-sm text-foam/80 md:text-base">
-                  Cari Baby Mo yang berbeda di antara keramaian! Tampilan iOS yang segar, autoplay & interaktif.
-                </p>
-              </div>
-              <span className="display rounded-full bg-aqua px-5 py-2 text-lg text-deep">Main ▶️</span>
-            </div>
-          </Link>
+          <h2 className="display mb-4 text-3xl text-foam text-stroke md:text-4xl">Game Baby Mo</h2>
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+            {MO_GAMES.map((g) => (
+              <Link key={g.href} href={g.href} className="block active:scale-95">
+                <div className="glass flex h-full flex-col items-center gap-2 rounded-3xl border-2 border-white/30 p-4 text-center transition-transform">
+                  <span className="text-6xl" style={{ animation: "floaty 4s ease-in-out infinite" }}>{g.emoji}</span>
+                  <span className="display text-lg text-sunny md:text-2xl">{g.title}</span>
+                  <span className="text-xs text-foam/75 md:text-sm">{g.blurb}</span>
+                </div>
+              </Link>
+            ))}
+          </div>
         </section>
 
         {/* Category grid */}
         <section className="w-full">
           <h2 className="display mb-4 text-3xl text-foam text-stroke md:text-4xl">Pilih Permainan</h2>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
-            {CATEGORIES.map((c) => {
+            {CATEGORIES.filter((c) => c.id !== "mo-expressions").map((c) => {
               const card = (
                 <div
                   className="glass flex h-full flex-col items-center gap-2 rounded-3xl border-2 border-white/30 p-4 transition-transform"

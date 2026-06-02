@@ -21,7 +21,11 @@ export default function RevealOverlay({ animal }: { animal: Animal }) {
           {animal.nameEn && <span className="display text-xl text-aqua md:text-2xl">({animal.nameEn})</span>}
         </div>
         <p className="mt-1 text-lg text-foam/90 md:text-2xl">
-          🏝️ <span className="font-semibold">{animal.habitat}</span>
+          {animal.habitat && (
+            <>
+              🏝️ <span className="font-semibold">{animal.habitat}</span>
+            </>
+          )}
         </p>
         <p className="mt-1 text-base leading-snug text-foam md:text-xl">💡 {animal.funFact}</p>
       </div>
