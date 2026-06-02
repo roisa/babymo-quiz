@@ -38,6 +38,23 @@ export default function HomePage() {
           </Link>
         </div>
 
+        {/* Featured: Spot the Odd One (fresh iOS-style mode) */}
+        <section className="w-full">
+          <h2 className="display mb-4 text-3xl text-foam text-stroke md:text-4xl">Mode Spesial</h2>
+          <Link href="/spot/" className="block active:scale-[0.98]">
+            <div className="glass flex flex-col items-center gap-3 rounded-3xl border-2 border-white/30 p-5 transition-transform sm:flex-row sm:gap-6 sm:text-left">
+              <span className="text-7xl" style={{ animation: "floaty 4s ease-in-out infinite" }}>🔍</span>
+              <div className="flex-1 text-center sm:text-left">
+                <span className="display text-2xl text-sunny md:text-3xl">Temukan yang Beda</span>
+                <p className="text-sm text-foam/80 md:text-base">
+                  Cari Baby Mo yang berbeda di antara keramaian! Tampilan iOS yang segar, autoplay & interaktif.
+                </p>
+              </div>
+              <span className="display rounded-full bg-aqua px-5 py-2 text-lg text-deep">Main ▶️</span>
+            </div>
+          </Link>
+        </section>
+
         {/* Category grid */}
         <section className="w-full">
           <h2 className="display mb-4 text-3xl text-foam text-stroke md:text-4xl">Pilih Permainan</h2>
