@@ -30,10 +30,11 @@ export function generateYouTubeMeta(
   const word = DIFF_WORD[difficulty];
 
   const titles = [
-    `${category.emoji} ${category.title}! ${count} Quiz ${word} Untuk Anak | Baby Mo Quiz`,
-    `${category.emoji} ${count} ${category.title} Seru | Belajar Sambil Bermain | Baby Mo Quiz`,
-    `Bisa Tebak Semua? ${category.emoji} ${category.title} ${word} | Baby Mo Quiz`,
-    `${category.emoji} ${category.headline} ${category.title} untuk Anak & Balita | Baby Mo Quiz`,
+    `${category.emoji} ${category.title} CHALLENGE! Bisa Tebak Semua ${count}? | Baby Mo Quiz`,
+    `😱 99% Anak GAGAL Tebak Semua! ${category.emoji} ${category.title} | Baby Mo Quiz`,
+    `🧠 Cuma JENIUS yang Bisa Tebak Ini! ${category.title} ${word} | Baby Mo Quiz`,
+    `${category.emoji} ${count} ${category.title} — Berapa yang Kamu Tahu? 🤔 | Baby Mo Quiz`,
+    `⏱️ Tebak ${category.title} dalam 10 Detik! Berani Coba? | Baby Mo Quiz`,
   ];
 
   const list = items
@@ -41,39 +42,41 @@ export function generateYouTubeMeta(
     .join("\n");
 
   const description = [
-    `${category.emoji} Selamat datang di Baby Mo Quiz!`,
+    `${category.emoji} Bisa tebak SEMUA ${count} ${category.title.toLowerCase()}? Buktikan kamu jenius! 🧠`,
     "",
-    `Ayo ikuti ${count} tebakan seru dalam video ini! Cocok untuk anak-anak dan balita. Tonton, tebak, dan belajar bersama Baby Mo! 🐳`,
+    `Tonton sampai habis dan hitung skormu! Cocok untuk anak-anak, balita, dan keluarga. Belajar sambil bermain bersama Baby Mo! 🐳`,
+    "",
+    "💬 BERAPA SKORMU? Tulis jawabanmu di kolom komentar — kami baca semua! 👇",
     "",
     "🎯 Cara bermain:",
-    "1. Lihat gambar atau petunjuknya",
-    "2. Tebak nama hewannya sebelum waktu habis",
-    "3. Jawaban dan fakta seru muncul di akhir!",
+    "1. Lihat gambar atau petunjuknya 👀",
+    "2. Tebak sebelum waktu habis ⏱️ (boleh pause!)",
+    "3. Jawaban & fakta seru muncul di akhir 🎉",
     "",
-    "📋 Daftar hewan di video ini:",
+    "📋 Daftar di video ini:",
     list,
     "",
-    "👶 Tentang Baby Mo Quiz:",
-    "Baby Mo Quiz membuat video edukasi yang menyenangkan untuk anak-anak Indonesia. Belajar sambil bermain!",
+    "🔔 SUKA video ini? LIKE 👍, SUBSCRIBE, dan nyalakan lonceng 🔔 — video baru setiap minggu!",
+    "🔁 Tonton lagi dan ajak teman & saudaramu ikut tebak!",
     "",
-    "🔔 Jangan lupa LIKE, SUBSCRIBE, dan nyalakan lonceng 🔔 supaya tidak ketinggalan video terbaru dari Baby Mo!",
+    "👶 Baby Mo Quiz — video edukasi seru untuk anak Indonesia. Belajar sambil bermain!",
     "",
-    "#BabyMoQuiz #TebakHewan #HewanLaut",
+    `#BabyMoQuiz #TebakHewan #QuizAnak`,
   ].join("\n");
 
   const hashtags = [
     "#BabyMoQuiz",
     "#TebakHewan",
-    "#TebakHewanLaut",
-    "#HewanLaut",
+    "#Challenge",
     "#QuizAnak",
+    "#TebakGambar",
     "#BelajarSambilBermain",
     "#EdukasiAnak",
     "#VideoAnak",
     "#Balita",
-    "#SeaAnimals",
     "#KidsQuiz",
     "#GuessTheAnimal",
+    "#QuizTime",
   ];
 
   return { titles, description, hashtags };

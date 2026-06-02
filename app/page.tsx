@@ -46,6 +46,12 @@ export default function HomePage() {
           >
             ✏️ Editor Kuis
           </Link>
+          <Link
+            href="/thumbnail/"
+            className="display rounded-3xl border-4 border-white/30 bg-white/15 px-8 py-4 text-xl text-foam transition-transform active:scale-95 md:text-2xl"
+          >
+            🖼️ Thumbnail
+          </Link>
         </div>
 
         {/* Featured: Baby Mo pose games */}

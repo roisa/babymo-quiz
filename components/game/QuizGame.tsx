@@ -25,6 +25,7 @@ import YouTubePanel from "./YouTubePanel";
 import IntroCard from "./IntroCard";
 import OutroCard from "./OutroCard";
 import BabyMoLogo from "@/components/BabyMoLogo";
+import { ctaForIndex, hypeBadge } from "@/lib/youtube/engagement";
 
 export default function QuizGame({ category }: { category: Category }) {
   const [settings, setSettings] = useState<QuizSettings>(DEFAULT_SETTINGS);
@@ -245,6 +246,12 @@ export default function QuizGame({ category }: { category: Category }) {
                 ⚙️ Ubah Pengaturan
               </button>
               <Link
+                href="/thumbnail/"
+                className="display rounded-3xl border-4 border-white/30 bg-white/15 px-6 py-3 text-xl text-foam transition-transform active:scale-95"
+              >
+                🖼️ Thumbnail
+              </Link>
+              <Link
                 href="/"
                 className="display rounded-3xl border-4 border-white/30 bg-white/15 px-6 py-3 text-xl text-foam transition-transform active:scale-95"
               >
@@ -269,17 +276,37 @@ export default function QuizGame({ category }: { category: Category }) {
 
       <div className="relative z-10 flex h-full flex-col gap-2 p-3 md:p-5">
         {/* TOP — headline (logo badge anchored left for branding) */}
-        <header className="relative flex shrink-0 items-center justify-center gap-3 text-center">
+        <header className="relative flex shrink-0 flex-col items-center gap-1 text-center">
           <BabyMoLogo size={44} showText={false} className="absolute left-0 top-0" />
-          <h1 className="display text-3xl text-sunny text-stroke sm:text-5xl md:text-6xl">
-            {category.headline}
-          </h1>
-          <span
-            className="display rounded-full px-3 py-1 text-sm md:text-base"
-            style={{ background: difficultyColor(settings.difficulty), color: "#03204a" }}
-          >
-            {settings.difficulty}
-          </span>
+          <div className="flex items-center justify-center gap-3">
+            <h1 className="display text-3xl text-sunny text-stroke sm:text-5xl md:text-6xl">
+              {category.headline}
+            </h1>
+            <span
+              className="display rounded-full px-3 py-1 text-sm md:text-base"
+              style={{ background: difficultyColor(settings.difficulty), color: "#03204a" }}
+            >
+              {settings.difficulty}
+            </span>
+            {hypeBadge(settings.difficulty, engine.index, engine.total) && (
+              <span
+                className="display animate-[pop-in_0.4s] rounded-full bg-coral px-3 py-1 text-sm text-white shadow-lg md:text-base"
+                style={{ animation: "var(--animate-pop-in), floaty 2.5s ease-in-out infinite" }}
+              >
+                {hypeBadge(settings.difficulty, engine.index, engine.total)}
+              </span>
+            )}
+          </div>
+          {/* Rotating engagement prompt — burned into the recorded frame. */}
+          {!revealed && (
+            <span
+              key={engine.index}
+              className="display rounded-full bg-white/15 px-4 py-1 text-lg text-foam text-stroke md:text-2xl"
+              style={{ animation: "var(--animate-pop-in)" }}
+            >
+              {ctaForIndex(engine.index)}
+            </span>
+          )}
         </header>
 
         {/* MIDDLE — left panel / center / right brand */}
