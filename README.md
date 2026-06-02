@@ -100,23 +100,65 @@ interface Animal {
 
 ```bash
 npm install
+npm run emoji      # download crisp SVG emoji art into public/emoji (once)
 npm run dev        # http://localhost:3000
 ```
+
+`npm run emoji` is optional — without it the app renders native text emoji.
+It's also run automatically before `build` so deploys include the SVGs.
 
 Build the static site:
 
 ```bash
-npm run build      # outputs to ./out
+npm run build      # outputs to ./out (runs `emoji` first)
 ```
 
+## 🖼️ Crisp visuals at 4K
+
+The UI is vector end-to-end — CSS layout, SVG mascot/decorations, and vector
+fonts — so it stays sharp at any resolution. Animal subjects render as **SVG
+emoji** (Twemoji) via `npm run emoji`, which stay crisp even blown up to fill a
+4K card (native bitmap emoji would look soft). Add real high-res photos through
+the editor (`image` field) for true-photo episodes.
+
 ## 🎬 Recording a video
+
+### Option A — screen capture (OBS recommended)
 
 1. `npm run dev`, open `/play`.
 2. Choose difficulty, answer mode and timer.
 3. Click **🎥 Mulai Sesi Rekaman YouTube** (full-screen + auto-play + clean UI).
-4. Record the screen with OBS or QuickTime (1920×1080, 16:9).
-5. When done, copy the generated title/description/hashtags from the finish
-   screen.
+4. Capture with OBS at **1920×1080 or 3840×2160 (4K)**, 16:9. On macOS, capture
+   desktop audio (e.g. BlackHole) so the synthesized SFX/music are recorded.
+5. Copy the generated title/description/hashtags from the finish screen.
+
+You can also launch a fully-configured session from a URL (handy for OBS):
+
+```
+/play/sea-animals/?auto=1&difficulty=Mudah&mode=silhouette&duration=12&count=20&music=1
+```
+
+### Option B — automated 4K render (Playwright + ffmpeg)
+
+Render a hands-free episode straight to a pixel-perfect 4K MP4 — no screen
+recording, no dropped frames:
+
+```bash
+npx playwright install chromium   # once
+brew install ffmpeg               # once (macOS)
+
+npm run dev                       # in one terminal
+npm run record -- --category sea-animals --difficulty Mudah \
+                  --mode silhouette --duration 12 --count 20 --music 1
+```
+
+Output lands in `episodes/` alongside a `.txt` of YouTube metadata. Flags:
+`--category --difficulty --mode --duration --count --order --music --sound
+--width --height --fps --out`.
+
+> The automated render produces **video only** (Playwright can't capture the
+> browser-generated audio). Add voiceover/music in your editor, or use Option A
+> (OBS) when you want the in-app audio captured live.
 
 ## ☁️ Deploy to GitHub Pages
 
@@ -131,7 +173,13 @@ For a custom domain at the apex, build with `NEXT_PUBLIC_BASE_PATH=""`.
 
 1. Create `data/<category>.json` shaped like `sea-animals.json`.
 2. Register it in `lib/categories/index.ts`.
-3. Done — the engine, UI, editor and YouTube generator all work unchanged.
+3. Run `npm run emoji` to fetch any new emoji SVGs.
+4. Done — the engine, UI, editor and YouTube generator all work unchanged.
+
+## 🙏 Credits
+
+Animal artwork uses [Twemoji](https://github.com/jdecked/twemoji) SVG emoji,
+licensed CC-BY 4.0. Downloaded locally by `npm run emoji`.
 
 ## 🗺️ Roadmap
 

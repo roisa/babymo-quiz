@@ -5,10 +5,13 @@
   "description": "Baby Mo Quiz — a production-ready, web-based quiz game for creating long-form YouTube quiz videos for kids. Brand: Baby Mo.",
   "scripts": {
     "dev": "next dev",
+    "emoji": "node scripts/fetch-emoji.mjs",
+    "prebuild": "node scripts/fetch-emoji.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "record": "node scripts/record-episode.mjs"
   },
   "dependencies": {
     "next": "15.5.18",
@@ -20,6 +23,7 @@
     "@types/node": "22.10.5",
     "@types/react": "19.0.7",
     "@types/react-dom": "19.0.3",
+    "playwright": "1.49.1",
     "postcss": "8.5.1",
     "tailwindcss": "4.3.0",
     "typescript": "5.7.3"
