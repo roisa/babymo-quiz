@@ -52,9 +52,12 @@ export default function HomePage() {
         <section className="w-full">
           <h2 className="display mb-4 text-3xl text-foam text-stroke md:text-4xl">Game Baby Mo</h2>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-            {MO_GAMES.map((g) => (
-              <Link key={g.href} href={g.href} className="block active:scale-95">
-                <div className="glass flex h-full flex-col items-center gap-2 rounded-3xl border-2 border-white/30 p-4 text-center transition-transform">
+            {MO_GAMES.map((g, i) => (
+              <Link key={g.href} href={g.href} className="block transition-transform hover:-translate-y-1 active:scale-95">
+                <div
+                  className="glass flex h-full flex-col items-center gap-2 rounded-3xl border-2 border-white/30 p-4 text-center transition-colors hover:border-sunny/70"
+                  style={{ animation: "var(--animate-pop-in)", animationDelay: `${i * 0.08}s`, animationFillMode: "both" }}
+                >
                   <span className="text-6xl" style={{ animation: "floaty 4s ease-in-out infinite" }}>{g.emoji}</span>
                   <span className="display text-lg text-sunny md:text-2xl">{g.title}</span>
                   <span className="text-xs text-foam/75 md:text-sm">{g.blurb}</span>
@@ -85,7 +88,7 @@ export default function HomePage() {
                 </div>
               );
               return c.available ? (
-                <Link key={c.id} href={`/play/${c.id}/`} className="active:scale-95">
+                <Link key={c.id} href={`/play/${c.id}/`} className="block transition-transform hover:-translate-y-1 active:scale-95">
                   {card}
                 </Link>
               ) : (

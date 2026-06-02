@@ -47,34 +47,38 @@ export default function AnswerChoices({
         const pose = win ? winPoseSrc : poseForAnswer(animal.id, i);
 
         return (
-          <button
+          <div
             key={choice}
-            type="button"
-            disabled={Boolean(selected) || revealed}
-            onClick={() => onSelect(choice)}
-            className="group flex items-center gap-2 rounded-[1.75rem] border-4 px-3 py-2.5 text-left transition-transform active:scale-95 disabled:cursor-default md:gap-4 md:px-5 md:py-4"
-            style={{ background: bg, borderColor: border, color, boxShadow: "0 8px 0 rgba(3,32,74,0.3)" }}
+            style={{ animation: "var(--animate-pop-in)", animationDelay: `${i * 0.07}s`, animationFillMode: "both" }}
           >
-            {/* Live Baby Mo pose */}
-            <span
-              className="relative flex h-14 w-14 shrink-0 items-center justify-center md:h-20 md:w-20"
-              style={{ animation: win ? "pop-in 0.4s" : `floaty ${4 + (i % 3)}s ease-in-out infinite` }}
+            <button
+              type="button"
+              disabled={Boolean(selected) || revealed}
+              onClick={() => onSelect(choice)}
+              className="group flex w-full items-center gap-2 rounded-[1.75rem] border-4 px-3 py-2.5 text-left transition-transform active:scale-95 disabled:cursor-default md:gap-4 md:px-5 md:py-4"
+              style={{ background: bg, borderColor: border, color, boxShadow: "0 8px 0 rgba(3,32,74,0.3)" }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={withBase(pose)}
-                alt=""
-                draggable={false}
-                className="h-full w-full select-none object-contain drop-shadow"
-                style={{ transform: win ? "scale(1.12)" : undefined }}
-              />
-            </span>
+              {/* Live Baby Mo pose */}
+              <span
+                className="relative flex h-14 w-14 shrink-0 items-center justify-center md:h-20 md:w-20"
+                style={{ animation: win ? "pop-in 0.4s" : `floaty ${4 + (i % 3)}s ease-in-out infinite` }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={withBase(pose)}
+                  alt=""
+                  draggable={false}
+                  className="h-full w-full select-none object-contain drop-shadow"
+                  style={{ transform: win ? "scale(1.12)" : undefined }}
+                />
+              </span>
 
-            <span className="display flex-1 text-2xl leading-tight md:text-4xl">{choice}</span>
+              <span className="display flex-1 text-2xl leading-tight md:text-4xl">{choice}</span>
 
-            {win && <span className="text-3xl md:text-5xl">🎉</span>}
-            {isChosen && !isCorrect && <span className="text-3xl md:text-5xl">❌</span>}
-          </button>
+              {win && <span className="text-3xl md:text-5xl">🎉</span>}
+              {isChosen && !isCorrect && <span className="text-3xl md:text-5xl">❌</span>}
+            </button>
+          </div>
         );
       })}
     </div>
