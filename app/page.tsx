@@ -4,6 +4,7 @@ import Link from "next/link";
 import { CATEGORIES } from "@/lib/categories";
 import OceanBackground from "@/components/game/OceanBackground";
 import Mascot from "@/components/game/Mascot";
+import BabyMoLogo from "@/components/BabyMoLogo";
 
 export default function HomePage() {
   return (
@@ -13,6 +14,7 @@ export default function HomePage() {
       <main className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center gap-8 px-4 py-10 text-center">
         {/* Hero */}
         <div className="flex flex-col items-center gap-3">
+          <BabyMoLogo size={96} showText={false} />
           <Mascot size={150} mood="cheer" className="floaty" />
           <h1 className="display text-6xl text-sunny text-stroke md:text-8xl">Baby Mo Quiz</h1>
           <p className="display text-2xl text-aqua md:text-4xl">TEBAK HEWANNYA... 🐠</p>

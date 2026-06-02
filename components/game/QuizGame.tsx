@@ -24,6 +24,7 @@ import SetupPanel from "./SetupPanel";
 import YouTubePanel from "./YouTubePanel";
 import IntroCard from "./IntroCard";
 import OutroCard from "./OutroCard";
+import BabyMoLogo from "@/components/BabyMoLogo";
 
 export default function QuizGame({ category }: { category: Category }) {
   const [settings, setSettings] = useState<QuizSettings>(DEFAULT_SETTINGS);
@@ -267,8 +268,9 @@ export default function QuizGame({ category }: { category: Category }) {
       <Confetti active={revealed} />
 
       <div className="relative z-10 flex h-full flex-col gap-2 p-3 md:p-5">
-        {/* TOP — headline */}
-        <header className="flex shrink-0 items-center justify-center gap-3 text-center">
+        {/* TOP — headline (logo badge anchored left for branding) */}
+        <header className="relative flex shrink-0 items-center justify-center gap-3 text-center">
+          <BabyMoLogo size={44} showText={false} className="absolute left-0 top-0" />
           <h1 className="display text-3xl text-sunny text-stroke sm:text-5xl md:text-6xl">
             {category.headline}
           </h1>

@@ -11,6 +11,7 @@ import { SPOT_LEVELS } from "@/lib/spot/puzzles";
 import { playSfx, unlockAudio, type SfxName } from "@/lib/audio/sfx";
 import { startMusic, stopMusic } from "@/lib/audio/music";
 import Confetti from "@/components/game/Confetti";
+import BabyMoLogo from "@/components/BabyMoLogo";
 import SpotGrid from "./SpotGrid";
 
 const TIMER_PRESETS = [10, 15, 20];
@@ -157,6 +158,7 @@ export default function SpotGame() {
       <div className="ios relative min-h-[100dvh] w-full overflow-hidden px-4 py-8">
         <div className="mx-auto flex max-w-3xl flex-col gap-6">
           <header className="text-center">
+            <BabyMoLogo size={64} showText={false} className="mx-auto mb-2" />
             <p className="text-xl font-semibold text-[var(--ios-ink-soft)] md:text-2xl">Baby Mo Quiz</p>
             <h1 className="display text-5xl text-[var(--ios-ink)] md:text-7xl">Temukan yang Beda 🔍</h1>
             <p className="mt-2 text-lg text-[var(--ios-ink-soft)] md:text-xl">
@@ -305,13 +307,16 @@ export default function SpotGame() {
 
       {/* TOP — prompt + level + timer */}
       <header className="flex shrink-0 flex-wrap items-center justify-between gap-2 px-4 pt-3 md:px-6">
-        <div className="min-w-0">
-          <h1 className="display truncate text-2xl text-[var(--ios-ink)] sm:text-3xl md:text-4xl">
-            {round.puzzle.emoji} {round.puzzle.title}
-          </h1>
-          <p className="text-sm font-semibold text-[var(--ios-ink-soft)] md:text-base">
-            Temukan Baby Mo yang berbeda! 🔍
-          </p>
+        <div className="flex min-w-0 items-center gap-3">
+          <BabyMoLogo size={44} showText={false} />
+          <div className="min-w-0">
+            <h1 className="display truncate text-2xl text-[var(--ios-ink)] sm:text-3xl md:text-4xl">
+              {round.puzzle.emoji} {round.puzzle.title}
+            </h1>
+            <p className="text-sm font-semibold text-[var(--ios-ink-soft)] md:text-base">
+              Temukan Baby Mo yang berbeda! 🔍
+            </p>
+          </div>
         </div>
         <div className="flex items-center gap-2">
           <span className="ios-glass rounded-full px-3 py-1 text-sm font-bold text-[var(--ios-ink)] md:text-base">

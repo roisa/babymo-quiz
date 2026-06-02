@@ -11,6 +11,7 @@ import {
   type QuizSettings,
 } from "@/lib/engine/types";
 import Mascot from "./Mascot";
+import BabyMoLogo from "@/components/BabyMoLogo";
 
 const TIMER_PRESETS = [10, 15, 20];
 
@@ -64,6 +65,7 @@ export default function SetupPanel({
 
   return (
     <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col gap-5 p-4 md:p-6">
+      <BabyMoLogo size={56} className="mx-auto" />
       <div className="flex items-center justify-center gap-4">
         <Mascot size={96} mood="happy" className="floaty" />
         <div className="text-center">
