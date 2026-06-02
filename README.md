@@ -155,6 +155,12 @@ npm run record -- --category sea-animals --difficulty Mudah \
                   --mode silhouette --duration 12 --count 20 --music 1
 ```
 
+Render the Spot-the-Odd-One mode too (`--difficulty` = grid level):
+
+```bash
+npm run record -- --category spot --difficulty Sedang --duration 12 --count 10 --music 1
+```
+
 Output lands in `episodes/` alongside a `.txt` of YouTube metadata. Flags:
 `--category --difficulty --mode --duration --count --order --music --sound
 --width --height --fps --out`.

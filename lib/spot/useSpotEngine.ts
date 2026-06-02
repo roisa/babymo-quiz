@@ -104,13 +104,14 @@ export function useSpotEngine(
     for (let i = 0; i < settings.roundCount; i++) {
       chosen.push(pool[i % pool.length]!); // wrap if more rounds than puzzles
     }
-    return chosen.map((puzzle) => ({
-      puzzle,
-      oddIndex: Math.floor(Math.random() * cells),
-      total: cells,
-      cols: level.cols,
-      rows: level.rows,
-    }));
+    // Randomize the odd cell each round, never repeating the previous position.
+    let prev = -1;
+    return chosen.map((puzzle) => {
+      let oddIndex = Math.floor(Math.random() * cells);
+      while (cells > 1 && oddIndex === prev) oddIndex = Math.floor(Math.random() * cells);
+      prev = oddIndex;
+      return { puzzle, oddIndex, total: cells, cols: level.cols, rows: level.rows };
+    });
   }, [settings.levelKey, settings.order, settings.roundCount]);
 
   const enterQuestion = useCallback(

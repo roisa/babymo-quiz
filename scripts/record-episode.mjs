@@ -72,6 +72,23 @@ const outFile = cfg.out ? join(ROOT, cfg.out) : join(outDir, `${cfg.category}-${
 const tmpDir = join(outDir, `.tmp-${stamp}`);
 
 function buildUrl() {
+  const base = cfg.base.replace(/\/$/, "");
+
+  // The "Spot the Odd One" mode lives at /spot and uses `level` instead of
+  // `mode`/`difficulty`.
+  if (cfg.category === "spot") {
+    const params = new URLSearchParams({
+      auto: "1",
+      level: cfg.difficulty,
+      duration: String(cfg.duration),
+      count: String(cfg.count),
+      order: cfg.order,
+      music: cfg.music,
+      sound: cfg.sound,
+    });
+    return `${cfg.origin}${base}/spot/?${params.toString()}`;
+  }
+
   const params = new URLSearchParams({
     auto: "1",
     difficulty: cfg.difficulty,
@@ -82,7 +99,6 @@ function buildUrl() {
     music: cfg.music,
     sound: cfg.sound,
   });
-  const base = cfg.base.replace(/\/$/, "");
   return `${cfg.origin}${base}/play/${cfg.category}/?${params.toString()}`;
 }
 
@@ -93,6 +109,22 @@ function hasFfmpeg() {
 
 function writeMetaSidecar() {
   try {
+    if (cfg.category === "spot") {
+      const title = `🔍 Temukan Baby Mo yang Beda! ${cfg.count} Tantangan Seru Untuk Anak | Baby Mo Quiz`;
+      const lines = [
+        title,
+        "",
+        "🔍 Semua Baby Mo terlihat sama… tapi satu berbeda. Bisa temukan secepat kilat?",
+        "",
+        `${cfg.count} ronde seru, tingkat: ${cfg.difficulty}. Tonton, cari, dan belajar bersama Baby Mo!`,
+        "",
+        "🔔 LIKE, SUBSCRIBE, dan nyalakan lonceng untuk video terbaru dari Baby Mo!",
+        "",
+        "#BabyMoQuiz #TemukanYangBeda #SpotTheDifference #QuizAnak #EdukasiAnak",
+      ];
+      writeFileSync(outFile.replace(/\.mp4$/, ".txt"), lines.join("\n"));
+      return;
+    }
     const cat = JSON.parse(readFileSync(join(ROOT, "data", `${cfg.category}.json`), "utf8"));
     const title = `${cat.emoji} ${cat.title}! ${cfg.count} Quiz Seru Untuk Anak | Baby Mo Quiz`;
     const lines = [

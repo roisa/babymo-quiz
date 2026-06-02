@@ -313,8 +313,8 @@ export default function QuizGame({ category }: { category: Category }) {
           </aside>
         </div>
 
-        {/* BOTTOM — countdown */}
-        <footer className="shrink-0">
+        {/* BOTTOM — countdown (bottom padding clears the floating controls) */}
+        <footer className="shrink-0 pb-14 md:pb-16">
           <CountdownBar remaining={engine.remaining} duration={settings.durationSec} paused={engine.paused} />
         </footer>
       </div>
