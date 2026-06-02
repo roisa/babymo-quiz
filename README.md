@@ -14,6 +14,9 @@ QuickTime, and produce long-form "Guess The Sea Animal" videos for YouTube.
 
 - **Flagship mode:** _Guess The Sea Animal_ (Tebak Hewan Laut) — 50+ animals.
 - **Second mode:** _Guess The Farm Animal_ (Tebak Hewan Ternak) — 30 animals.
+- **Spot mode:** _Temukan yang Beda_ at `/spot` — find the odd Baby Mo pose in a
+  grid (autoplay + interactive), in a fresh iOS "liquid glass" UI. Uses the real
+  Baby Mo character art and supports the same URL auto-start / recording flow.
 - **Reusable quiz engine** that is category-agnostic (Sea & Farm Animals today;
   Dinosaurs, Flags, Space, … drop-in tomorrow).
 - **Background music:** optional gentle looping tune (synthesized, no files).
