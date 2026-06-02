@@ -100,6 +100,7 @@ export function useSpotEngine(
   const pausedRef = useRef(false);
   const lastTickRef = useRef(-1);
   const revealAtRef = useRef(0);
+  const indexRef = useRef(0); // navigation source of truth (avoids nested setState)
 
   const current = rounds[index];
   const total = rounds.length;
@@ -162,6 +163,7 @@ export function useSpotEngine(
 
   const enterQuestion = useCallback(
     (i: number) => {
+      indexRef.current = i;
       setIndex(i);
       setPicked(null);
       setWrongPick(null);
@@ -191,6 +193,7 @@ export function useSpotEngine(
   const restart = useCallback(() => {
     stopLoop();
     setPhase("idle");
+    indexRef.current = 0;
     setIndex(0);
     setScore(0);
   }, [stopLoop]);
@@ -205,23 +208,17 @@ export function useSpotEngine(
   }, [onSfx]);
 
   const next = useCallback(() => {
-    setIndex((i) => {
-      const ni = i + 1;
-      if (ni >= total) {
-        setPhase("complete");
-        onSfx?.("complete");
-        return i;
-      }
+    const ni = indexRef.current + 1;
+    if (ni >= total) {
+      setPhase("complete");
+      onSfx?.("complete");
+    } else {
       enterQuestion(ni);
-      return i;
-    });
+    }
   }, [total, enterQuestion, onSfx]);
 
   const prev = useCallback(() => {
-    setIndex((i) => {
-      enterQuestion(Math.max(0, i - 1));
-      return i;
-    });
+    enterQuestion(Math.max(0, indexRef.current - 1));
   }, [enterQuestion]);
 
   const togglePause = useCallback(() => {
