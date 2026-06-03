@@ -13,6 +13,7 @@ import { playSfx, unlockAudio, type SfxName } from "@/lib/audio/sfx";
 import { startMusic, stopMusic } from "@/lib/audio/music";
 import Confetti from "@/components/game/Confetti";
 import BabyMoLogo from "@/components/BabyMoLogo";
+import ShareResult from "@/components/ShareResult";
 import SpotGrid from "./SpotGrid";
 
 const TIMER_PRESETS = [10, 15, 20];
@@ -279,6 +280,8 @@ export default function SpotGame({ variant = "odd" }: { variant?: SpotVariant })
             </p>
             <p className="mt-1 text-lg font-semibold text-[var(--ios-green)]">{pct}% benar</p>
           </div>
+
+          <ShareResult score={engine.score} total={engine.total} gameLabel={gameName} tone="light" className="hide-on-record" />
 
           <div className="hide-on-record ios-glass w-full rounded-[1.6rem] p-4 text-left">
             <p className="mb-1 font-bold text-[var(--ios-ink)]">📺 Judul YouTube</p>

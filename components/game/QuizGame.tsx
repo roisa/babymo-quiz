@@ -25,6 +25,7 @@ import YouTubePanel from "./YouTubePanel";
 import IntroCard from "./IntroCard";
 import OutroCard from "./OutroCard";
 import BabyMoLogo from "@/components/BabyMoLogo";
+import ShareResult from "@/components/ShareResult";
 import { ctaForIndex, hypeBadge } from "@/lib/youtube/engagement";
 
 export default function QuizGame({ category }: { category: Category }) {
@@ -226,6 +227,8 @@ export default function QuizGame({ category }: { category: Category }) {
           {/* Creator tools — hidden in recording mode so the outro stays clean. */}
           <div className="hide-on-record flex w-full flex-col items-center gap-5">
             <p className="display text-xl text-aqua md:text-2xl">{pct}% benar</p>
+
+            <ShareResult score={engine.score} total={engine.total} gameLabel={category.title} />
 
             <YouTubePanel category={category} items={engine.pool} difficulty={settings.difficulty} />
 
