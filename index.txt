@@ -1,0 +1,24 @@
+1:"$Sreact.fragment"
+2:I[9766,[],""]
+3:I[8924,[],""]
+4:I[7401,["619","static/chunks/619-ba102abea3e3d0e4.js","345","static/chunks/app/not-found-2064047bfcdb1cce.js"],"default"]
+5:I[7434,["619","static/chunks/619-ba102abea3e3d0e4.js","345","static/chunks/app/not-found-2064047bfcdb1cce.js"],"default"]
+6:I[2619,["619","static/chunks/619-ba102abea3e3d0e4.js","345","static/chunks/app/not-found-2064047bfcdb1cce.js"],""]
+7:I[1959,[],"ClientPageRoot"]
+8:I[7322,["619","static/chunks/619-ba102abea3e3d0e4.js","844","static/chunks/844-885f03d3a9252c39.js","974","static/chunks/app/page-a856ceb28b21d111.js"],"default"]
+b:I[4431,[],"OutletBoundary"]
+d:I[5278,[],"AsyncMetadataOutlet"]
+f:I[4431,[],"ViewportBoundary"]
+11:I[4431,[],"MetadataBoundary"]
+12:"$Sreact.suspense"
+14:I[7150,[],""]
+:HL["/babymo-quiz/_next/static/media/a65324f02aa278dc-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/babymo-quiz/_next/static/media/bca7023bf625e650-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/babymo-quiz/_next/static/css/f67cae251fd32fbc.css","style"]
+0:{"P":null,"b":"xZ1F4mzaGwI_ELzqpXLTW","p":"/babymo-quiz","c":["",""],"i":false,"f":[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/babymo-quiz/_next/static/css/f67cae251fd32fbc.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"id","className":"__variable_db6c37 __variable_63234b","children":["$","body",null,{"children":["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","div",null,{"className":"relative flex min-h-[100dvh] w-full items-center justify-center overflow-hidden","children":[["$","$L4",null,{}],["$","main",null,{"className":"relative z-10 flex flex-col items-center gap-5 px-6 text-center","children":[["$","$L5",null,{"size":150,"mood":"wow","className":"floaty"}],["$","h1",null,{"className":"display text-7xl text-sunny text-stroke md:text-9xl","children":"404"}],["$","p",null,{"className":"display text-3xl text-foam text-stroke md:text-5xl","children":"Wah, tersesat di laut! 🌊"}],["$","p",null,{"className":"max-w-md text-lg text-foam/85 md:text-xl","children":"Halaman yang kamu cari berenang entah ke mana. Ayo kembali ke permukaan bersama Baby Mo!"}],["$","div",null,{"className":"flex flex-wrap items-center justify-center gap-3","children":[["$","$L6",null,{"href":"/","className":"display rounded-3xl border-4 border-[#1b7a44] bg-[var(--color-easy)] px-8 py-4 text-2xl text-deep transition-transform active:scale-95","style":{"boxShadow":"0 8px 0 rgba(3,32,74,0.35)"},"children":"🏠 Kembali ke Beranda"}],["$","$L6",null,{"href":"/play/","className":"display rounded-3xl border-4 border-white/30 bg-white/15 px-8 py-4 text-xl text-foam transition-transform active:scale-95","children":"▶️ Main Kuis"}]]}]]}]]}],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]}]]}],{"children":["__PAGE__",["$","$1","c",{"children":[["$","$L7",null,{"Component":"$8","searchParams":{},"params":{},"promises":["$@9","$@a"]}],null,["$","$Lb",null,{"children":["$Lc",["$","$Ld",null,{"promise":"$@e"}]]}]]}],{},null,false]},null,false],["$","$1","h",{"children":[null,[["$","$Lf",null,{"children":"$L10"}],["$","meta",null,{"name":"next-size-adjust","content":""}]],["$","$L11",null,{"children":["$","div",null,{"hidden":true,"children":["$","$12",null,{"fallback":null,"children":"$L13"}]}]}]]}],false]],"m":"$undefined","G":["$14",[]],"s":false,"S":true}
+9:{}
+a:"$0:f:0:1:2:children:1:props:children:0:props:params"
+10:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#06367a"}]]
+c:null
+e:{"metadata":[["$","title","0",{"children":"Baby Mo Quiz — Tebak Hewan Laut"}],["$","meta","1",{"name":"description","content":"Baby Mo Quiz: pembuat video kuis seru untuk anak. Tebak hewan laut, rekam dengan OBS/QuickTime, dan buat video YouTube edukatif."}],["$","meta","2",{"name":"application-name","content":"Baby Mo Quiz"}]],"error":null,"digest":"$undefined"}
+13:"$e:metadata"
